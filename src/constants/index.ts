@@ -1,4 +1,4 @@
-export const BEARER_KEY = import.meta.env.VITE_API_TOKEN;
+export const BEARER_KEY = import.meta.env.VITE_TMDB_TOKEN;
 
 export const BASE_URL = 'https://api.themoviedb.org/3';
 export const BASE_IMAGE_PATH = 'https://image.tmdb.org/t/p'
