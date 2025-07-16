@@ -1,22 +1,22 @@
-import {http} from "../libs/api-service.ts";
-import {BEARER_KEY, ROUTES} from "../constants";
-import type {Movie} from "../types/movie.ts";
- interface MoviesResponse {
-    page: number;
+import axios from "axios";
+import type { Movie } from "../types/movie";
+
+interface MoviesHttpResponse {
     results: Movie[];
+    page: number;
     total_pages: number;
-    total_results: number;
 }
-export const fetchMovie = async (query:string,page:string = '1'):Promise<MoviesResponse> => {
-    const urlSearchParams:URLSearchParams = new URLSearchParams({
-        query,
-        page
-    })
-    const {data} = await http.get<MoviesResponse>(`${ROUTES.searchMovie}?${urlSearchParams.toString()}`,{
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${BEARER_KEY}`
-        }
+
+export const fetchMovies = async (query: string, page: number): Promise<MoviesHttpResponse> => {
+    const myKey = import.meta.env.VITE_TMDB_TOKEN;
+
+    const response = await axios.get<MoviesHttpResponse>(`https://api.themoviedb.org/3/search/movie`, {
+        params: {
+            query: query,
+            page
+        },
+        headers: { Authorization: `Bearer ${myKey}`, }
     });
-    return data;
+
+    return response.data;
 }

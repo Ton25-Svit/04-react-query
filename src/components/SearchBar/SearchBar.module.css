@@ -40,6 +40,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 240px;
+    outline: none;
 }
 
 .button {
@@ -54,4 +55,5 @@
 
 .button:hover {
     background-color: #004182;
+    outline: none;
 }
